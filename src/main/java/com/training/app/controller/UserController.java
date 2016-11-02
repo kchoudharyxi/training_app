@@ -1,4 +1,4 @@
-package com.training.app.web;
+package com.training.app.controller;
 
 import com.training.app.model.User;
 import com.training.app.service.SecurityService;
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public User registrationtest() {
+    public User registrationTest() {
         return new User();
     }
 
@@ -36,6 +36,14 @@ public class UserController {
 
         return "login";
     }*/
+/*
+
+   @RequestMapping(value = "/login", method = RequestMethod.GET)
+   public String login(User user){
+       securityService.autoLogin(user.getUsername(),user.getPassword());
+       return "login";
+   }*/
+
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome() {

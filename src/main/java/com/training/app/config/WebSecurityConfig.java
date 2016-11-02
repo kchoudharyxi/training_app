@@ -1,4 +1,4 @@
-package com.training.app;
+package com.training.app.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,11 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/registration", "/test").permitAll()
+                .antMatchers("/registration", "/test", "/welcome").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")
                 .permitAll()
                 .and()
                 .logout()
