@@ -27,19 +27,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/registration", "/test", "/welcome").permitAll()
+                .antMatchers("/registration").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
+
+       /* http
+                .authorizeRequests()
+                .antMatchers("/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")
                 .permitAll()
+                .defaultSuccessUrl("/welcome")
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll();*/
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
+
 }
