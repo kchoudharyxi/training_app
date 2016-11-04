@@ -23,9 +23,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public String welcome() {
+    public User welcome() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = auth.getName();
-        return "Welcome "+currentUserName;
+        User user = new User();
+        user.setUsername("Welcome "+currentUserName);
+        return user;
     }
 }
