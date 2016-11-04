@@ -1,7 +1,6 @@
 package com.training.app.controller;
 
 import com.training.app.model.User;
-import com.training.app.service.SecurityService;
 import com.training.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,12 +12,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private SecurityService securityService;
-
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public User registration(@RequestBody User user) {
         userService.save(user);
+        user.setPassword(null);
         return user;
     }
 
@@ -27,7 +24,7 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = auth.getName();
         User user = new User();
-        user.setUsername("Welcome "+currentUserName);
+        user.setUsername(currentUserName);
         return user;
     }
 }
